@@ -12,7 +12,15 @@ impl Storage{
     pub fn generate() -> Self{
         let file = fs::read_to_string("storage.json");
         match file{
-            Result::Ok(file) => serde_json::from_str(&file).unwrap(),
+            Result::Ok(file) => match serde_json::from_str(&file){
+                Result::Ok(tasks) => tasks,
+                Result::Err(_) => {
+                    let tasks: Vec<Task> = Vec::new();
+                    Self{
+                        tasks
+                    }
+                }
+            },
             Result::Err(_) => {
                 let tasks: Vec<Task> = Vec::new();
                 Self{

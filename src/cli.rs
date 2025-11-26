@@ -82,7 +82,7 @@ impl CliApp{
                 if let Some(task) = self.storage.tasks.get_mut(index as usize) {
                     task.done();
                 } else {
-                    println!("Нет задачи с индексом {}", index);
+                    println!("Нет задачи с индексом {}", index + 1);
                 }
             }
             Command::Save => self.storage.save()
